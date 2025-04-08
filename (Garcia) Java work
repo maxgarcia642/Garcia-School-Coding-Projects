@@ -1,0 +1,624 @@
+import java.util.Scanner;      // For getting user input.
+import java.text.DecimalFormat; // For number formatting (if needed).
+import java.util.Random;       // For generating random numbers (used elsewhere).
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        // Infinite loop: The program will keep running until the user chooses the exit option.
+        while (true) {
+            // Display main menu and list all available projects.
+            System.out.println("\n===== Haas Hall Academy Bentonville High School Spring 2021 - Java Projects for AP Computer Science =====");
+            System.out.println("Select a project to run:");
+            System.out.println(" 1. Pounds to Kilograms Converter");
+            System.out.println(" 2. Driving Cost Calculator");
+            System.out.println(" 3. Rounding Number Demo");
+            System.out.println(" 4. Heads or Tails Coin Flip");
+            System.out.println(" 5. Random Element Selector");
+            System.out.println(" 6. Java Keywords Exercise (Matrix)");
+            System.out.println(" 7. Connect Four Game");
+            System.out.println(" 8. Circle Overlap Checker");
+            System.out.println(" 9. Pentagon Area Calculator");
+            System.out.println("10. Social Security Number Validator");
+            System.out.println("11. Character Limit Checker");
+            System.out.println("12. University Tuition Calculator");
+            System.out.println("13. Maximum Digit Occurrence");
+            System.out.println("14. Array Summation Demo");
+            System.out.println("15. Return Statement Demo");
+            System.out.println("16. Factorial Calculation");
+            System.out.println("17. AP Computer Science Final: GPS Program");
+            System.out.println(" 0. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = scnr.nextInt();  // Reads user's menu choice.
+            scnr.nextLine();              // Consume any leftover newline.
+
+            // Process the user's selection using a switch-case structure.
+            switch (choice) {
+                case 1:
+                    poundsToKilograms();
+                    break;
+                case 2:
+                    drivingCostCalculator();
+                    break;
+                case 3:
+                    roundingNumberDemo();
+                    break;
+                case 4:
+                    headsOrTails();
+                    break;
+                case 5:
+                    randomElementSelector();
+                    break;
+                case 6:
+                    javaKeywordsExercise();
+                    break;
+                case 7:
+                    connectFourGame();
+                    break;
+                case 8:
+                    circleOverlapChecker();
+                    break;
+                case 9:
+                    pentagonAreaCalculator();
+                    break;
+                case 10:
+                    ssnValidator();
+                    break;
+                case 11:
+                    characterLimitChecker();
+                    break;
+                case 12:
+                    tuitionCalculator();
+                    break;
+                case 13:
+                    maxDigitOccurrence();
+                    break;
+                case 14:
+                    arraySummationDemo();
+                    break;
+                case 15:
+                    returnStatementDemo();
+                    break;
+                case 16:
+                    factorialCalculation();
+                    break;
+                case 17:
+                    gpsProgram();  // Run the new GPS Program.
+                    break;
+                case 0:
+                    System.out.println("Exiting...");
+                    scnr.close();
+                    return;
+                default:
+                    System.out.println("Invalid choice. Try again.");
+            }
+            // Wait for the user to press Enter before showing the menu again.
+            System.out.println("\nPress Enter to return to the menu...");
+            scnr.nextLine();
+        }
+    }
+
+    // 1. Pounds to Kilograms Converter
+    static void poundsToKilograms() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nCompSci_APRA-1: POUNDS TO KILOGRAMS CONVERTER");
+        System.out.print("How many pounds are there?: ");
+        double pounds = scnr.nextDouble();      // Reads input in pounds.
+        double kilograms = pounds / 2.2046;       // Converts pounds to kilograms.
+        System.out.println("\nCALCULATING...\n");
+        System.out.println(pounds + " lbs is equivalent to: " + kilograms + " kg");
+    }
+
+    // 2. Driving Cost Calculator
+    static void drivingCostCalculator() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nCompSci_APRA-2: THE COST OF DRIVING CALCULATOR (MILES PER GALLON)");
+        System.out.print(" - How many miles have you driven?: ");
+        double distance = scnr.nextDouble();
+        System.out.print(" - How many gallons were used?: ");
+        double gallonsUsed = scnr.nextDouble();
+        System.out.print(" - How much did you pay per gallon?: ");
+        double gallonPrice = scnr.nextDouble();
+        // Calculate the total driving cost.
+        double totalCost = distance * gallonsUsed * gallonPrice;
+        System.out.println("\nCALCULATING...\n");
+        System.out.printf("The total cost for driving under these conditions is: $%.2f\n", totalCost);
+    }
+
+    // 3. Rounding Number Demo
+    static void roundingNumberDemo() {
+        System.out.println("\nRounding Number Demo:");
+        double exampleNumber = 3.1254555555555;
+        System.out.printf("Rounded to two decimal places: %.2f\n", exampleNumber);
+    }
+
+    // 4. Heads or Tails Coin Flip
+    static void headsOrTails() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nAPRA-3: HEADS OR TAILS COIN FLIP GAME (RANDOMIZED)");
+        System.out.println("[The Computer flips the coin]");
+        System.out.print("Enter 'Heads' or 'Tails': ");
+        String playerGuess = scnr.nextLine().trim();
+        // Normalize input to lowercase and remove periods.
+        String normalizedGuess = playerGuess.toLowerCase().replace(".", "");
+        int computerSide = (int) (Math.random() * 2) + 1; // 1 = heads, 2 = tails.
+        int playerChoice = normalizedGuess.equals("heads") ? 1 : normalizedGuess.equals("tails") ? 2 : 0;
+
+        if (playerChoice == 0) {
+            System.out.println("Invalid input. Please enter Heads or Tails.");
+            return;
+        }
+
+        System.out.println("\nFlipping the coin...");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        if (playerChoice == computerSide) {
+            System.out.println("You won! It's " + (computerSide == 1 ? "Heads" : "Tails") + ".");
+            String victory = "| VICTORY |";
+            for (int i = 0; i < victory.length(); i++) {
+                System.out.print(victory.charAt(i));
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            System.out.println();
+        } else {
+            System.out.println("You lost! It's " + (computerSide == 1 ? "Heads" : "Tails") + ".");
+            String gameOver = "| GAME OVER |";
+            for (int i = 0; i < gameOver.length(); i++) {
+                System.out.print(gameOver.charAt(i));
+                try {
+                    Thread.sleep(600);
+                } catch (InterruptedException ex) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    // 5. Random Element Selector
+    static void randomElementSelector() {
+        System.out.println("\nRandom Element Selector");
+        String[] items = {"Apple", "Banana", "Cherry", "Date", "Elderberry"};
+        int randomIndex = (int) (Math.random() * items.length);
+        System.out.println("Randomly selected item: " + items[randomIndex]);
+    }
+
+    // 6. Java Keywords Exercise (Matrix simulation with typewriter effect)
+    static void javaKeywordsExercise() {
+        System.out.println();
+        System.out.println("Java Keywords Exercise Project: THE MATRIX");
+        System.out.println("(NOTE: Do not be alarmed, this is just a movie reference.)");
+        System.out.println("-----------------------");
+        System.out.println("REBOOTING SYSTEMS... WARNING: YOUR CONNECTION IS NOT SECURE.");
+        System.out.println(" - UNKNOWN PUBLISHER ESTABLISHING REMOTE CONNECTION.");
+        System.out.println(" - LOCATION BEING TRACKED. SECURITY BREACHED. INFORMATION STOLEN");
+        System.out.println(" - COMPUTER IS NOT PROTECTED - YOU ARE NOT SAF3&*!@932771");
+        System.out.println(" - error: CAN'T BE IDENTIFI!!!!");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println();
+
+        typewriter("Wake up, User...", 2000);
+        typewriter("Have you ever felt that something was not right with the world?", 100);
+        typewriter("The Matrix has you...", 100);
+
+        int min = 1000, max = 9999;
+        int ran1 = (int) (Math.random() * (max - min + 1) + min);
+        int ran2 = (int) (Math.random() * (max - min + 1) + min);
+        int ran3 = (int) (Math.random() * (max - min + 1) + min);
+        int ran4 = (int) (Math.random() * (max - min + 1) + min);
+        int ran5 = (int) (Math.random() * (max - min + 1) + min);
+        int ran6 = (int) (Math.random() * (max - min + 1) + min);
+        int ran7 = (int) (Math.random() * (max - min + 1) + min);
+        int ran8 = (int) (Math.random() * (max - min + 1) + min);
+        String crazyChars = "^*&+!=";
+        String crazyChar2 = "%$@?>";
+        System.out.println("    ----    USER FOUND.  ERROR_69: FILE CORRUPTED    ----");
+        System.out.println(" __                                                   __");
+        System.out.println("| #" + ran1 + "  #" + ran2 + "  #" + ran3 + " |");
+        System.out.println("| #" + ran4 + "  #" + crazyChars + " YOU " + crazyChar2 + "  #" + ran5 + " |");
+        System.out.println("| #" + ran6 + "  #" + ran7 + "  #" + ran8 + " |");
+        System.out.println(" ––                                                      ––");
+        typewriter("You're being watched. You're not safe here. Hurry.", 100);
+        typewriter("Follow the white bird outside.", 100);
+        typewriter("Tick, tock. The clock is ticking User.", 200);
+        System.out.println();
+        System.out.print("COMMUNICATION TERMINATED ");
+    }
+
+    // Helper method for printing text with a typewriter effect.
+    static void typewriter(String text, int delay) {
+        for (int i = 0; i < text.length(); i++) {
+            System.out.print(text.charAt(i));
+            try {
+                Thread.sleep(delay);  // Pause between each character.
+            } catch (InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+        }
+        System.out.println();
+    }
+
+    // 7. Connect Four Game (using a variant of Mr. Johnson's version)
+    static void connectFourGame() {
+        Scanner scnr = new Scanner(System.in);
+        int[][] board = new int[6][7];  // A board with 6 rows and 7 columns.
+        int diskNum = 0;
+        System.out.println("\nConnect Four Game");
+        while (true) {
+            diskNum++;
+            int disk;       // 1 for red, 2 for blue.
+            String color;   // Color for display.
+            if (diskNum % 2 == 0) {
+                color = "\033[33mred\033[0m";   // Red disk.
+                disk = 1;
+            } else {
+                color = "\u001B[34mblue\033[0m";  // Blue disk.
+                disk = 2;
+            }
+            System.out.print("Please drop a " + color + " disk at column (1-7): ");
+            int col = scnr.nextInt() - 1;  // Adjust user input to an index.
+            if (col < 0 || col > 6) {
+                System.out.println("Invalid column. Try again.");
+                continue;
+            }
+            boolean placed = false;
+            // Place the disk in the lowest available row.
+            for (int i = board.length - 1; i >= 0; i--) {
+                if (board[i][col] == 0) {
+                    board[i][col] = disk;
+                    placed = true;
+                    break;
+                }
+            }
+            if (!placed) {
+                System.out.println("This column is full. Try again.");
+                continue;
+            }
+            updateBoard(board);
+            // Check if the current move wins the game.
+            if (checkWinner(board, disk)) {
+                System.out.println("The " + color + " player won with four in a row!");
+                break;
+            }
+            // Check for draw if board is full.
+            if (diskNum >= 6 * 7) {
+                System.out.println("It is a draw, sorry!");
+                break;
+            }
+        }
+    }
+
+    // Method to print the Connect Four board.
+    static void updateBoard(int[][] board) {
+        System.out.println(" 1 2 3 4 5 6 7 ");  // Display column numbers.
+        for (int i = 0; i < board.length; i++) {
+            System.out.print("|");
+            for (int j = 0; j < board[i].length; j++) {
+                String c;
+                if (board[i][j] == 1) {
+                    c = "\033[33mX\033[0m";  // Display red disk.
+                } else if (board[i][j] == 2) {
+                    c = "\u001B[34mO\033[0m";  // Display blue disk.
+                } else {
+                    c = " ";  // Empty cell.
+                }
+                System.out.print(c + "|");
+            }
+            System.out.println();
+        }
+        System.out.println("---------------");  // Board border.
+    }
+
+    // Checks horizontal, vertical, and diagonal win conditions for Connect Four.
+    static boolean checkWinner(int[][] board, int disk) {
+        // Horizontal check.
+        for (int i = 0; i < board.length; i++) {
+            int count = 0;
+            for (int j = 0; j < board[i].length; j++) {
+                if (board[i][j] == disk) {
+                    count++;
+                    if (count == 4)
+                        return true;
+                } else {
+                    count = 0;
+                }
+            }
+        }
+        // Vertical check.
+        for (int j = 0; j < 7; j++) {
+            int count = 0;
+            for (int i = 0; i < board.length; i++) {
+                if (board[i][j] == disk) {
+                    count++;
+                    if (count == 4)
+                        return true;
+                } else {
+                    count = 0;
+                }
+            }
+        }
+        // Diagonal check (down-right).
+        for (int i = 0; i < board.length - 3; i++) {
+            for (int j = 0; j < 7 - 3; j++) {
+                if (board[i][j] == disk && board[i + 1][j + 1] == disk &&
+                    board[i + 2][j + 2] == disk && board[i + 3][j + 3] == disk)
+                    return true;
+            }
+        }
+        // Diagonal check (up-right).
+        for (int i = 3; i < board.length; i++) {
+            for (int j = 0; j < 7 - 3; j++) {
+                if (board[i][j] == disk && board[i - 1][j + 1] == disk &&
+                    board[i - 2][j + 2] == disk && board[i - 3][j + 3] == disk)
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    // 8. Circle Overlap Checker
+    static void circleOverlapChecker() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nAPCA-04: GEOMETRY AND COORDINATION - IS CIRCLE #2 OVERLAPPING OR WITHIN #1?");
+        System.out.println("CIRCLE #1");
+        System.out.print("  - Enter circle1's center x-coordinate: ");
+        double x1 = scnr.nextDouble();
+        System.out.print("  - Enter circle1's center y-coordinate: ");
+        double y1 = scnr.nextDouble();
+        System.out.print("  - Enter circle1's radius: ");
+        double r1 = scnr.nextDouble();
+        System.out.println("\nCIRCLE #2");
+        System.out.print("  - Enter circle2's center x-coordinate: ");
+        double x2 = scnr.nextDouble();
+        System.out.print("  - Enter circle2's center y-coordinate: ");
+        double y2 = scnr.nextDouble();
+        System.out.print("  - Enter circle2's radius: ");
+        double r2 = scnr.nextDouble();
+
+        // Compute the distance between the centers using the Pythagorean theorem.
+        double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        double radiusSubtraction = Math.abs(r1 - r2);
+        double radiusAddition = r1 + r2;
+        System.out.print("\nCALCULATING...");
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.println("\n----------------");
+        System.out.println("The unrounded distance between the centers is: " + distance);
+        if (distance <= radiusSubtraction)
+            System.out.println("Circle #2 is inside Circle #1.");
+        else if (distance <= radiusAddition)
+            System.out.println("Circle #2 overlaps Circle #1.");
+        else
+            System.out.println("Circle #2 is out of range from interacting with Circle #1.");
+    }
+
+    // 9. Pentagon Area Calculator
+    static void pentagonAreaCalculator() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nAPCA-05: GEOMETRIC CALCULATION OF THE AREA OF A PENTAGON");
+        System.out.print("Enter the length from the center to a vertex of the pentagon: ");
+        double radius = scnr.nextDouble();
+        double side = 2 * radius * Math.sin(Math.PI / 5);
+        double area = (5 * side * side) / (4 * Math.tan(Math.PI / 5));
+        System.out.print("Would you like the number to be rounded? (yes/no): ");
+        String choice = scnr.next();
+        if (choice.equalsIgnoreCase("no")) {
+            System.out.println("The area of the pentagon is: " + area);
+        } else {
+            System.out.print("To how many decimal places would you like to round it?: ");
+            int decimals = scnr.nextInt();
+            String format = "%." + decimals + "f";
+            System.out.printf("The area of the pentagon is: " + format + "\n", area);
+        }
+    }
+
+    // 10. Social Security Number Validator
+    static void ssnValidator() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nAPCA-06: SOCIAL SECURITY NUMBER VALIDATION (Format: XXX-XX-XXXX)");
+        System.out.print("Enter a SSN: ");
+        String ssn = scnr.nextLine().trim();
+        if (ssn.length() == 11 && ssn.charAt(3) == '-' && ssn.charAt(6) == '-') {
+            String[] parts = ssn.split("-");
+            if (parts.length == 3 && parts[0].matches("\\d{3}") &&
+                parts[1].matches("\\d{2}") && parts[2].matches("\\d{4}")) {
+                System.out.println("The Social Security Number is valid.");
+            } else {
+                System.out.println("The Social Security Number is invalid.");
+            }
+        } else if (ssn.length() == 9 && ssn.matches("\\d{9}")) {
+            System.out.println("The Social Security Number is valid, but you forgot to add hyphens.");
+        } else {
+            System.out.println("The Social Security Number is invalid.");
+        }
+    }
+
+    // 11. Character Limit Checker
+    static void characterLimitChecker() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.print("\nEnter your Name: ");
+        String name = scnr.next();
+        if (name.length() <= 20)
+            System.out.println("Less than or equal to 20 characters.");
+        else
+            System.out.println("Exceeds 20 characters. Please keep it short.");
+    }
+
+    // 12. University Tuition Calculator
+    static void tuitionCalculator() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nAPCA-07 (Part 1): UNIVERSITY TUITION CALCULATOR");
+        System.out.print("How much is the university tuition? (e.g., 10000.00): ");
+        double tuition = scnr.nextDouble();
+        System.out.print("What is the percent increase (e.g., 0.05 for 5%)?: ");
+        double percentIncrease = scnr.nextDouble();
+        System.out.print("How many years will you stay at the university?: ");
+        int years = scnr.nextInt();
+
+        double totalCost = 0;
+        double currentCost = tuition;
+        for (int i = 1; i <= years; i++) {
+            System.out.printf("Year %d cost: $%.2f\n", i, currentCost);
+            totalCost += currentCost;
+            currentCost = currentCost * (1 + percentIncrease);
+        }
+        System.out.printf("The total cost over %d years is: $%.2f\n", years, totalCost);
+    }
+
+    // 13. Maximum Digit Occurrence
+    static void maxDigitOccurrence() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nAPCA-07 (Part 2): OCCURRENCE OF MAX DIGIT");
+        System.out.print("Enter a number (up to 9 digits): ");
+        int num = scnr.nextInt();
+        int maxDigit = 0, count = 0;
+        while (num > 0) {
+            int digit = num % 10;
+            num /= 10;
+            if (digit > maxDigit) {
+                maxDigit = digit;
+                count = 1;
+            } else if (digit == maxDigit) {
+                count++;
+            }
+        }
+        System.out.println("The maximum digit is: " + maxDigit);
+        System.out.println("It occurs " + count + " times.");
+    }
+
+    // 14. Array Summation Demo
+    static void arraySummationDemo() {
+        int[][] mat = { { 7, 14, 8, 11, 9 }, { 9, 6, 2, 5 } };
+        int total = 0;
+        for (int r = 0; r < mat.length; r++) {
+            for (int c = 0; c < Math.min(mat[r].length, r + 1); c++) {
+                total += mat[r][c];
+            }
+        }
+        System.out.println("\nArray Summation Demo:");
+        System.out.println("Total summed: " + total);
+    }
+
+    // 15. Return Statement Demo
+    static void returnStatementDemo() {
+        System.out.println("\nReturn Statement Demo:");
+        int result = exp();
+        System.out.println("Result of exp() is: " + result);
+    }
+
+    // Sample method to demonstrate a return statement.
+    static int exp() {
+        int x = 10;
+        for (int i = 1; i <= 3; i++) {
+            x = x * 10;
+        }
+        int y = x / 10;
+        return y;
+    }
+
+    // 16. Factorial Calculation
+    static void factorialCalculation() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nFactorial Calculation:");
+        System.out.print("Enter a number: ");
+        int num = scnr.nextInt();
+        int result = factorial(num);
+        System.out.println(num + "! = " + result);
+    }
+
+    // Recursive method to compute factorial.
+    static int factorial(int n) {
+        if (n != 0)
+            return n * factorial(n - 1);
+        else
+            return 1;
+    }
+
+    // 17. GPS Program
+    static void gpsProgram() {
+        Scanner scnr = new Scanner(System.in);
+        System.out.println("\nGPS Program");
+        System.out.println("This program calculates the distance, initial bearing, and cardinal direction");
+        System.out.println("from Location A to Location B, based on latitude and longitude coordinates.");
+        
+        // Input coordinates for Location A.
+        System.out.println("\nEnter coordinates for Location A:");
+        System.out.print("  Latitude (in degrees): ");
+        double lat1 = scnr.nextDouble();
+        System.out.print("  Longitude (in degrees): ");
+        double lon1 = scnr.nextDouble();
+        
+        // Input coordinates for Location B.
+        System.out.println("\nEnter coordinates for Location B:");
+        System.out.print("  Latitude (in degrees): ");
+        double lat2 = scnr.nextDouble();
+        System.out.print("  Longitude (in degrees): ");
+        double lon2 = scnr.nextDouble();
+        
+        // Convert degrees to radians (for computation).
+        double radLat1 = Math.toRadians(lat1);
+        double radLon1 = Math.toRadians(lon1);
+        double radLat2 = Math.toRadians(lat2);
+        double radLon2 = Math.toRadians(lon2);
+        
+        // Calculate the distance using the Haversine formula.
+        // Earth's radius in kilometers (mean radius)
+        double R = 6371.0;
+        double deltaLat = radLat2 - radLat1;
+        double deltaLon = radLon2 - radLon1;
+        double a = Math.pow(Math.sin(deltaLat / 2), 2) + 
+                   Math.cos(radLat1) * Math.cos(radLat2) * Math.pow(Math.sin(deltaLon / 2), 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        double distance = R * c;  // Distance in kilometers.
+        
+        // Calculate the initial bearing (forward azimuth) from A to B.
+        double y = Math.sin(deltaLon) * Math.cos(radLat2);
+        double x = Math.cos(radLat1) * Math.sin(radLat2) - 
+                   Math.sin(radLat1) * Math.cos(radLat2) * Math.cos(deltaLon);
+        double bearingRadians = Math.atan2(y, x);
+        // Convert bearing from radians to degrees and normalize to 0-360.
+        double bearingDegrees = (Math.toDegrees(bearingRadians) + 360) % 360;
+        
+        // Determine the cardinal direction based on the bearing.
+        String direction;
+        if ((bearingDegrees >= 0 && bearingDegrees < 22.5) || (bearingDegrees >= 337.5 && bearingDegrees < 360))
+            direction = "North";
+        else if (bearingDegrees >= 22.5 && bearingDegrees < 67.5)
+            direction = "Northeast";
+        else if (bearingDegrees >= 67.5 && bearingDegrees < 112.5)
+            direction = "East";
+        else if (bearingDegrees >= 112.5 && bearingDegrees < 157.5)
+            direction = "Southeast";
+        else if (bearingDegrees >= 157.5 && bearingDegrees < 202.5)
+            direction = "South";
+        else if (bearingDegrees >= 202.5 && bearingDegrees < 247.5)
+            direction = "Southwest";
+        else if (bearingDegrees >= 247.5 && bearingDegrees < 292.5)
+            direction = "West";
+        else // bearing between 292.5 and 337.5.
+            direction = "Northwest";
+        
+        // Display the results.
+        System.out.println("\nCALCULATING GPS data...");
+        try {
+            Thread.sleep(1000);  // Pause for dramatic effect.
+        } catch (InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        System.out.printf("\nDistance from Location A to B: %.2f km\n", distance);
+        System.out.printf("Initial Bearing: %.2f°\n", bearingDegrees);
+        System.out.println("Direction: " + direction);
+    }
+}
