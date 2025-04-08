@@ -1,0 +1,182 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cmath>    // for M_PI and floor()
+
+using namespace std;
+
+// Function for the Bike Race Calculator Tool
+void bikeRaceCalculator() {
+    cout << "\nWelcome to the Bike Race calculator tool!" << endl;
+    
+    // Part 1: Race Calculations
+    cout << "Please input the length of the race in km >> ";
+    double raceLength_km;
+    cin >> raceLength_km;
+    
+    // Calculations for water station and bike tire
+    int waterStations = static_cast<int>(raceLength_km / 10); // how many water stations are needed
+    double bikeTire_diameter_mm = 622;      // assignment-provided bike tire diameter
+    double Pi_Approximation = floor(M_PI * 100.0) / 100.0; // rounds Pi down to 2 decimal places
+    double bikeTire_circumference = bikeTire_diameter_mm * Pi_Approximation; // calculate circumference
+    
+    // Calculation for number of pedal rotations to finish the race
+    double pedalTo_wheel = 1.6; // average pedal to wheel ratio
+    double raceLength_mm = raceLength_km * 1000000; // converting km to mm
+    double pedalTimes = raceLength_mm / (bikeTire_circumference * pedalTo_wheel);
+    
+    // Output calculations to the user
+    cout << "\nThis street biking race is " << raceLength_km << " km in length." << endl;
+    cout << "You will need to supply " << waterStations << " water stations for your racers." << endl;
+    cout << "The circumference of the bike tire is " << bikeTire_circumference << " mm." << endl;
+    cout << "With an average pedal to wheel ratio of " << pedalTo_wheel 
+         << ", your racers will have pedaled around " << pedalTimes << " times!" << endl;
+    
+    // Part 2: Profit and Cost Calculations
+    cout << "\nPlease input number of participants >> ";
+    int numParticipants;
+    cin >> numParticipants;
+    
+    // Profit calculations
+    double participationFee = 40.00;
+    double grossProfit = participationFee * numParticipants;
+    
+    // Water station cost calculations
+    double waterStation_setup = 62.34; // cost per water station
+    double waterStation_Costs = waterStations * waterStation_setup;
+    
+    // Racer tag cost calculations
+    double tagCost = 2.23;
+    double racerTags = numParticipants * tagCost;
+    
+    // Net profit calculation
+    double netProfit = grossProfit - waterStation_Costs - racerTags;
+    
+    // Display profit and cost calculations (setprecision rounds to 2 decimal places)
+    cout << "\nGross profit: $" << fixed << setprecision(2) << grossProfit << endl;
+    cout << "Water station costs: $" << fixed << setprecision(2) << waterStation_Costs << endl;
+    cout << "Racer tag costs: $" << fixed << setprecision(2) << racerTags << endl;
+    cout << "Net profit: $" << fixed << setprecision(2) << netProfit << endl;
+    
+    cout << "Happy racing!" << endl;
+}
+
+// Function for the Scamazon Product Checkout Tool
+void scamazonShop() {
+    // Product information
+    string products[] = {"Let's Potato Chips", "Krispy Crepe", "Ugh Boots", "Mattel Hover Board", "ACME Jet Propelled Unicycle"};
+    double prices[] = {1.57, 3.50, 10.75, 399.99, 1000.30};
+    
+    // Constants
+    const double taxRate = 0.095; // 9.5%
+    
+    // Display product menu
+    cout << "\nWelcome to Scamazon - have we got a deal for you!" << endl;
+    cout << "Currently in stock we have: " << endl;
+    
+    for (int i = 0; i < 5; i++) {
+        cout << " [" << char('a' + i) << "] " << products[i] << " $" 
+             << fixed << setprecision(2) << prices[i] << endl;
+    }
+    
+    // User chooses a product
+    cout << "Choose a product to purchase >> ";
+    char choice;
+    cin >> choice;
+    
+    string itemChosen;
+    double itemPrice = 0.0;
+    
+    if (choice >= 'a' && choice <= 'e') {
+        itemChosen = products[choice - 'a'];
+        itemPrice = prices[choice - 'a'];
+        cout << "You have added " << itemChosen << " to your cart." << endl;
+    } else {
+        // Assign a default product if user enters an invalid choice
+        itemChosen = "Flubber";
+        itemPrice = 19.97;
+        cout << "You did not choose a valid option. An item has been placed in your cart for you." << endl;
+    }
+    
+    // Check out
+    cout << "Would you like to check out now? (Y/N) >> ";
+    char checkoutChoice;
+    cin >> checkoutChoice;
+    
+    if (checkoutChoice == 'Y' || checkoutChoice == 'y') {
+        // Calculate subtotal, tax, and total
+        double subtotal = itemPrice;
+        double tax = subtotal * taxRate;
+        double total = subtotal + tax;
+        
+        // Display subtotal, tax, and total
+        cout << "\nSubtotal: $" << fixed << setprecision(2) << subtotal << endl;
+        cout << "Tax: $" << fixed << setprecision(2) << tax << endl;
+        cout << "Total: $" << fixed << setprecision(2) << total << endl;
+        
+        // Payment options
+        cout << "Would you like to pay with cash or card? (cash/card) >> ";
+        string paymentMethod;
+        cin >> paymentMethod;
+        
+        if (paymentMethod == "cash") {
+            cout << "Please input the amount of cash >> ";
+            double cashAmount;
+            cin >> cashAmount;
+            
+            if (cashAmount >= total) {
+                double change = cashAmount - total;
+                cout << "Thank you! You paid $" << fixed << setprecision(2) << cashAmount 
+                     << " and your change is $" << fixed << setprecision(2) << change << endl;
+            } else {
+                cout << "Whoops! You're missing $" << fixed << setprecision(2) 
+                     << total - cashAmount << " from your payment of $" 
+                     << fixed << setprecision(2) << cashAmount << ". Maybe next time!" << endl;
+            }
+        } else if (paymentMethod == "card") {
+            cout << "Thank you! Your card will be billed $" << fixed << setprecision(2) << total << endl;
+        } else {
+            cout << "Error! Please try again and submit either cash or card." << endl;
+        }
+    } else {
+        cout << "No problem! Your item has been removed from your cart and put back on the virtual shelf." << endl;
+    }
+    
+    cout << "Thank you for visiting Scamazon - please return soon!" << endl;
+}
+
+// Main function offering a menu for the user to choose which project to run
+int main() {
+    int choice;
+    
+    do {
+        // Display main menu
+        cout << "\n============================\n";
+        cout << "   University of Arkansas Fall 2023 - C++ Projects for Programming Foundations I\n";
+        cout << "============================\n";
+        cout << "Select an option:\n";
+        cout << " 1. Bike Race Calculator Tool\n";
+        cout << " 2. Scamazon Product Checkout\n";
+        cout << " 3. Exit Program\n";
+        cout << "Enter your choice (1-3) >> ";
+        cin >> choice;
+        
+        // Process user selection
+        switch (choice) {
+            case 1:
+                bikeRaceCalculator();
+                break;
+            case 2:
+                scamazonShop();
+                break;
+            case 3:
+                cout << "Goodbye!" << endl;
+                break;
+            default:
+                cout << "Invalid option, please choose again." << endl;
+                break;
+        }
+    } while (choice != 3);
+    
+    return 0;
+}
