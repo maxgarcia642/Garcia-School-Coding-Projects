@@ -1,0 +1,1444 @@
+#!/usr/bin/env python3
+"""
+Haas Hall Academy Bentonville High School Fall 2018 - Python Challenges for Computer Science
+=========================================================================
+This file includes 27 challenges, each in its own function.
+A main menu lets you choose which challenge to run.
+
+Challenges:
+  1.  List of Flavors
+  2.  List of Numbers Command
+  3.  Looping the Array
+  4.  Input (Name, Age, Year of Birth)
+  5.  The Missing Numbers
+  6.  DNA Sequence Analysis
+  7.  The Calculator
+  8.  Range List of Divisibility by 7
+  9.  Numbers & Letters Input
+ 10.  The Area of a Circle (Version 1)
+ 11.  Rock-Paper-Scissors Game
+ 12.  The Area of a Circle (Teacher's Version)
+ 13.  Password Validity
+ 14.  Dictionary Demonstration
+ 15.  Summing Two Random Numbers via Function
+ 16.  Temperature Conversion
+ 17.  Randomized Password Generator
+ 18.  MID-TERM WATCH PROGRAM (with Reaction Game, Current Time, Timer, Stopwatch, and a Turtle Clock)
+ 19.  List Value Returning Multiplication
+ 20.  The Euclidean Algorithm (GCD)
+ 21.  Add-to-10 Input String Qmarks
+ 22.  Prime Number Identification
+ 23.  DARK OUTSIDE?
+ 24.  Input Target Matching
+ 25.  Programming Choice – Heads or Tails (Typewriter Effect)
+ 26.  Roots of Quadratic Equations (with complex roots support)
+ 27.  FINAL PROJECT STORY GAME: THE TOP SECRET MISSION
+"""
+
+import time
+import random
+import sys
+import string
+import re
+from math import sqrt, pi, atan2, radians, degrees
+import datetime
+import turtle  # For Turtle Clock in Challenge 18
+import cmath   # For complex math in Challenge 26
+
+###########################################################################
+# Challenge 1: LIST OF FLAVORS
+###########################################################################
+def challenge1():
+    """
+    Challenge 1: List of Flavors
+    - Defines several flavor strings and prints various combinations.
+    """
+    print("\nChallenge 1: LIST OF FLAVORS")
+    print(" ")
+    
+    flavor0 = "Chocolate"
+    flavor1 = "Strawberry"
+    flavor2 = "Vanilla"
+    flavor3 = "Rocky Road"
+    flavor4 = "Mint"
+
+    # Print different flavor pairs.
+    print(flavor0 + " " + flavor1)
+    print(flavor0 + " " + flavor2)
+    print(flavor0 + " " + flavor3)
+    print(flavor0 + " " + flavor4)
+    print(flavor1 + " " + flavor2)
+    print(flavor1 + " " + flavor3)
+    print(flavor1 + " " + flavor4)
+    print(flavor2 + " " + flavor3)
+    print(flavor2 + " " + flavor4)
+    print(flavor3 + " " + flavor4)
+    print()
+
+###########################################################################
+# Challenge 2: LIST OF NUMBERS COMMAND
+###########################################################################
+def challenge2():
+    """
+    Challenge 2: List of Numbers Command
+    - Demonstrates list manipulation (removing and inserting items).
+    """
+    print("\nChallenge 2: LIST OF NUMBERS COMMAND")
+    print(" ")
+    
+    myLIST = [1, 2, 3, 4]
+    myLIST.remove(4)
+    print("After removing 4:", myLIST)
+    myLIST.remove(1)
+    myLIST.insert(4, 4)
+    print("After removing 1 and inserting 4 at index 4:", myLIST)
+    myLIST.insert(0, 1)
+    myLIST.insert(5, 5)
+    print("After inserting 1 at beginning and 5 at index 5:", myLIST)
+    myLIST.remove(5)
+    myLIST.remove(1)
+    myLIST.insert(2, 3)
+    myLIST.insert(0, 2)
+    print("Final list:", myLIST)
+    print()
+
+###########################################################################
+# Challenge 3: LOOPING THE ARRAY
+###########################################################################
+def challenge3():
+    """
+    Challenge 3: Looping the Array
+    - Iterates through a list of integers using a while loop.
+    """
+    print("\nChallenge 3: LOOPING THE ARRAY")
+    print(" ")
+    
+    Integers = [7, 3, 4, 3, 8, 2, 1, 1, 2, 7, 8]
+    index = 0
+    while index < len(Integers):
+        print("Element at index", index, ":", Integers[index])
+        index += 1
+    print()
+
+###########################################################################
+# Challenge 4: INPUT (Name, Age, Year of Birth)
+###########################################################################
+def challenge4():
+    """
+    Challenge 4: Input (Name, Age, Year of Birth)
+    - Reads user data and calculates the year in which the user will be 100.
+    """
+    print("\nChallenge 4: INPUT")
+    print(" ")
+    
+    name = input("What is your name: ")
+    print(" ")
+    age = input("What is your age: ")
+    print(" ")
+    year = input("What was the year you were born?: ")
+    print(" ")
+    
+    current_year = 2018
+    difference = 100 - int(age)
+    year_difference = current_year + int(difference)
+    
+    print(str(name) + ". In " + str(difference) + " years from now, in the")
+    print("year " + str(year_difference) + ", you'll be 100 years old.")
+    print()
+
+###########################################################################
+# Challenge 5: THE MISSING NUMBERS
+###########################################################################
+def challenge5():
+    """
+    Challenge 5: The Missing Numbers
+    - Determines which numbers are missing in a provided list's range.
+    """
+    print("\nChallenge 5: THE MISSING NUMBERS")
+    print(" ")
+    
+    myList = [1, 2, 3, 5, 6, 7, 9, 10]
+    print("Original list:", myList)
+    print(" ")
+    newList = [x for x in range(myList[0], myList[-1] + 1)]
+    missing = list(set(newList) ^ set(myList))
+    print("Missing numbers:", missing)
+    print()
+
+###########################################################################
+# Challenge 6: DNA SEQUENCE ANALYSIS
+###########################################################################
+def challenge6():
+    """
+    Challenge 6: DNA Sequence Analysis
+    - Prints a formatted DNA sequence.
+    - Counts the occurrences of A, C, G, and T and computes the GC percentage.
+    """
+    print("\nChallenge 6: DNA SEQUENCE ANALYSIS")
+    print(" ")
+    
+    DNA = ("ACAAGATGCCATTGTCCCCCGGCCTCCTGCTGCTGCTGCTCTCCGGGGCCACGGCCACCGCTGCCCTGCCCCTGGAGGGTGGCCCCACCGGCCGAGACAGCGAGCATATGCAGGAAGCGGCAGGAATAAGGAAAAGCAGCCTCCTGACTTTCCTCGCTTGGTGGTTTGAGTGGACCTCCCAGGCCAGTGCCGGGCCCCTCATAGGAGAGGAAGCTCGGGAGGTGGCCAGGCGGCAGGAAGGCGCACCCCCCCAGCAATCCGCGCGCCGGGACAGAATGCCCTGCAGGAACTTCTTCTGGAAGACCTTCTCCTCCTGCAAATAAAACCTCACCCATGAATGCTCACGCAAGTTTAATTACAGACCTGAA")
+    
+    print("DNA Sequence:")
+    # Print the DNA in segments for readability.
+    print("ACAAGATGCCATTGTCCCCCGGCCTCCTGCTGCTGCTGCT")
+    print("CTCCGGGGCCACGGCCACCGCTGCCCTGCCCCTGGAGGGT")
+    print("GGCCCCACCGGCCGAGACAGCGAGCATATGCAGGAAGCGG")
+    print("CAGGAATAAGGAAAAGCAGCCTCCTGACTTTCCTCGCTTG")
+    print("GTGGTTTGAGTGGACCTCCCAGGCCAGTGCCGGGCCCCTC")
+    print("ATAGGAGAGGAAGCTCGGGAGGTGGCCAGGCGGCAGGAAG")
+    print("GCGCACCCCCCCAGCAATCCGCGCGCCGGGACAGAATGCC")
+    print("CTGCAGGAACTTCTTCTGGAAGACCTTCTCCTCCTGCAAA")
+    print("TAAAACCTCACCCATGAATGCTCACGCAAGTTTAATTACA")
+    print("GACCTGAA")
+    
+    base_counts = {"A": 0, "C": 0, "G": 0, "T": 0}
+    for base in DNA:
+        if base in base_counts:
+            base_counts[base] += 1
+
+    print("\nBase counts:")
+    print("A =", base_counts["A"])
+    print("C =", base_counts["C"])
+    print("G =", base_counts["G"])
+    print("T =", base_counts["T"])
+    
+    total = sum(base_counts.values())
+    gc_percentage = ((base_counts["G"] + base_counts["C"]) / float(total)) * 100
+    print("\nGC Percentage: " + str(gc_percentage) + "%")
+    print()
+
+###########################################################################
+# Challenge 7: THE CALCULATOR
+###########################################################################
+def challenge7():
+    """
+    Challenge 7: The Calculator
+    - Accepts two numbers and an operation (ADD, SUB, MULTI, DIV, EXP, SQRT).
+    - Performs the arithmetic operation and prints the result.
+    """
+    print("\nChallenge 7: THE CALCULATOR")
+    print("This calculator handles one operation at a time.")
+    print("Operations: ADD, SUB, MULTI, DIV, EXP, SQRT")
+    print("If using SQRT, type 'NONE' for the second number.")
+    
+    num1 = input("Enter the first number: ")
+    op = input("Enter operation (ADD, SUB, MULTI, DIV, EXP, SQRT): ")
+    num2 = input("Enter the second number (or 'NONE' if SQRT): ")
+    
+    Number_One = int(num1)
+    if op.upper() != "SQRT":
+        Number_Two = int(num2)
+    
+    if op.upper() == "ADD":
+        print("Result:", Number_One + Number_Two)
+    elif op.upper() == "SUB":
+        print("Result:", Number_One - Number_Two)
+    elif op.upper() == "MULTI":
+        print("Result:", Number_One * Number_Two)
+    elif op.upper() == "DIV":
+        print("Result:", Number_One / float(Number_Two))
+        print("Or:", Number_One // Number_Two, "with a Remainder of", Number_One % Number_Two)
+    elif op.upper() == "EXP":
+        print("Result:", Number_One ** Number_Two)
+    elif op.upper() == "SQRT" and num2.upper() == "NONE":
+        print("Result:", sqrt(Number_One))
+    else:
+        print("Invalid operation.")
+    print()
+
+###########################################################################
+# Challenge 8: RANGE LIST OF DIVISIBILITY BY 7
+###########################################################################
+def challenge8():
+    """
+    Challenge 8: Range List of Divisibility by 7
+    - Prints every number from 14 to 199 that is divisible by 7.
+    """
+    print("\nChallenge 8: RANGE LIST OF DIVISIBILITY BY 7")
+    print("The range is from 14 to 199.")
+    print("Numbers divisible by 7:")
+    for x in range(14, 200):
+        if x % 7 == 0:
+            print(x)
+    print()
+
+###########################################################################
+# Challenge 9: NUMBERS & LETTERS INPUT
+###########################################################################
+def challenge9():
+    """
+    Challenge 9: Numbers & Letters Input
+    - Counts and prints the total letters (A–Z) and digits in an input sentence.
+    - Optionally prints detailed counts.
+    """
+    print("\nChallenge 9: NUMBERS & LETTERS INPUT")
+    print("This program counts the CAPITAL letters and digits in your sentence.")
+    
+    letter_counts = {chr(i): 0 for i in range(65, 91)}  # A-Z
+    digit_counts = {str(i): 0 for i in range(10)}
+    
+    User_Input = input("Input your sentence here: ")
+    for ch in User_Input:
+        if ch in letter_counts:
+            letter_counts[ch] += 1
+        if ch in digit_counts:
+            digit_counts[ch] += 1
+    
+    total_letters = sum(letter_counts.values())
+    total_digits = sum(digit_counts.values())
+    print("Total Letters =", total_letters)
+    print("Total Digits =", total_digits)
+    
+    EXACT_INPUT = input("Do you want detailed counts? (Yes/No): ")
+    if EXACT_INPUT.lower() in ["yes", "yes."]:
+        print("Detailed Letter Counts:")
+        for key in sorted(letter_counts.keys()):
+            print(f"{key} = {letter_counts[key]}")
+        print("Detailed Digit Counts:")
+        for key in sorted(digit_counts.keys()):
+            print(f"{key} = {digit_counts[key]}")
+    else:
+        print("Detailed counts skipped.")
+    print()
+
+###########################################################################
+# Challenge 10: THE AREA OF A CIRCLE (Version 1)
+###########################################################################
+def challenge10():
+    """
+    Challenge 10: The Area of a Circle (Version 1)
+    - Calculates the area (A = πr²) for a given radius.
+    """
+    print("\nChallenge 10: THE AREA OF A CIRCLE")
+    Radius = input("What is the radius of the circle?: ")
+    Area = pi * (int(Radius) ** 2)
+    print("The Area of the Circle is:", Area)
+    print()
+
+###########################################################################
+# Challenge 11: ROCK-PAPER-SCISSORS GAME
+###########################################################################
+def challenge11():
+    """
+    Challenge 11: Rock-Paper-Scissors Game
+    - Simulates a game of Rock-Paper-Scissors between the user and the computer.
+    """
+    print("\nChallenge 11: ROCK-PAPER-SCISSORS GAME")
+    Question = input("Are you ready? (Yes/No): ")
+    if Question.strip().lower() == "no":
+        print("Well, too bad!")
+    print("Rock, Paper, Scissors...")
+    The_Choice = input("Make your choice: ")
+    computerList = ["Rock", "Paper", "Scissors"]
+    Computer_Choice = random.choice(computerList)
+    print("The Computer chose", Computer_Choice + "!")
+    if The_Choice == "Rock":
+        if Computer_Choice == "Rock":
+            print("IT'S A TIE!")
+        elif Computer_Choice == "Paper":
+            print("YOU LOSE!")
+        else:
+            print("YOU WIN!")
+    elif The_Choice == "Paper":
+        if Computer_Choice == "Rock":
+            print("YOU WIN!")
+        elif Computer_Choice == "Paper":
+            print("IT'S A TIE!")
+        else:
+            print("YOU LOSE!")
+    elif The_Choice == "Scissors":
+        if Computer_Choice == "Rock":
+            print("YOU LOSE!")
+        elif Computer_Choice == "Paper":
+            print("YOU WIN!")
+        else:
+            print("IT'S A TIE!")
+    else:
+        print("Invalid choice.")
+    print()
+
+###########################################################################
+# Challenge 12: THE AREA OF A CIRCLE (Teacher's Version)
+###########################################################################
+def challenge12():
+    """
+    Challenge 12: The Area of a Circle (Teacher's Version)
+    - Another version for calculating the area of a circle.
+    """
+    print("\nChallenge 12: THE AREA OF A CIRCLE (Teacher's Version)")
+    Radius_teacher = int(input("What is the radius of the circle?: "))
+    Area_teacher = pi * (Radius_teacher ** 2)
+    print("The Area of the Circle is:", Area_teacher)
+    print()
+
+###########################################################################
+# Challenge 13: PASSWORD VALIDITY
+###########################################################################
+def challenge13():
+    """
+    Challenge 13: Password Validity
+    - Checks if an input password meets multiple criteria (uppercase, lowercase,
+      digit, special character, and length).
+    """
+    print("\nChallenge 13: PASSWORD VALIDITY")
+    print("Required Criteria:")
+    print(" - At least one uppercase letter")
+    print(" - At least one lowercase letter")
+    print(" - At least one digit")
+    print(" - At least one special character (common ones)")
+    print(" - Length between 8 and 14 characters")
+    
+    User_Password = input("Enter your Password: ")
+    Password_Length = len(User_Password)
+    special_characters_pattern = r"[`~!@#$%^&*_\-=\+\[\]\{\}\\|:;\"'<,>\./\?]"
+    valid = True
+    if not re.search(r"[A-Z]", User_Password):
+        print("Invalid: Missing an uppercase letter.")
+        valid = False
+    if not re.search(r"[a-z]", User_Password):
+        print("Invalid: Missing a lowercase letter.")
+        valid = False
+    if not re.search(r"[0-9]", User_Password):
+        print("Invalid: Missing a digit.")
+        valid = False
+    if not re.search(special_characters_pattern, User_Password):
+        print("Invalid: Missing a special character.")
+        valid = False
+    if Password_Length < 8:
+        print("Invalid: Password too short.")
+        valid = False
+    if Password_Length > 14:
+        print("Invalid: Password too long.")
+        valid = False
+    if valid:
+        print("The Password is valid.")
+    print()
+
+###########################################################################
+# Challenge 14: DICTIONARY DEMONSTRATION
+###########################################################################
+def challenge14():
+    """
+    Challenge 14: Dictionary Demonstration
+    - Demonstrates basic dictionary operations: creation, access, update,
+      iteration, and deletion.
+    """
+    print("\nChallenge 14: DICTIONARY DEMONSTRATION")
+    thisdict = {"brand": "Ford", "model": "Mustang", "year": 1964}
+    print("Initial dictionary:", thisdict)
+    input("Press Enter to continue...")
+    print("Access 'model':", thisdict["model"])
+    input("Press Enter to continue...")
+    print("Access 'brand' using get():", thisdict.get("brand"))
+    input("Press Enter to continue...")
+    print("Access 'year' using get():", thisdict.get("year"))
+    input("Press Enter to continue...")
+    thisdict["year"] = 2018  # Update the year.
+    print("Updated 'year':", thisdict.get("year"))
+    input("Press Enter to continue...")
+    print("Iterate through keys:")
+    for key in thisdict:
+        print(key, "=", thisdict[key])
+    input("Press Enter to continue...")
+    print("Iterate through values:")
+    for value in thisdict.values():
+        print(value)
+    input("Press Enter to continue...")
+    print("Iterate through items:")
+    for key, value in thisdict.items():
+        print(key, value)
+    input("Press Enter to continue...")
+    if "model" in thisdict:
+        print("Yes, 'model' is a key in the dictionary.")
+    input("Press Enter to continue...")
+    print("Dictionary length:", len(thisdict))
+    input("Press Enter to continue...")
+    thisdict["color"] = "red"
+    print("After adding 'color':", thisdict)
+    input("Press Enter to continue...")
+    del thisdict["model"]
+    print("After deleting 'model':", thisdict)
+    input("Press Enter to continue...")
+
+###########################################################################
+# Challenge 15: SUMMING TWO RANDOM NUMBERS VIA FUNCTION
+###########################################################################
+def challenge15():
+    """
+    Challenge 15: Summing Two Random Numbers
+    - Generates two random numbers (0 to 1,000,000) and sums them using a function.
+    """
+    print("\nChallenge 15: SUMMING TWO RANDOM NUMBERS")
+    rand = random.randint(0, 1000000)
+    randtwo = random.randint(0, 1000000)
+    print("First number:", rand)
+    print("Second number:", randtwo)
+    
+    def sumOftwo(x, y):
+        # Returns the sum of x and y.
+        return x + y
+    
+    print("Equation: {} + {}".format(rand, randtwo))
+    answer = sumOftwo(rand, randtwo)
+    print("Sum:", answer)
+    print()
+
+###########################################################################
+# Challenge 16: TEMPERATURE CONVERSION
+###########################################################################
+def challenge16():
+    """
+    Challenge 16: Temperature Conversion
+    - Converts an input temperature from one scale to another (F, C, or K).
+    """
+    print("\nChallenge 16: TEMPERATURE CONVERSION")
+    print("Available scales: Fahrenheit (F), Celsius (C), Kelvin (K)")
+    
+    Temperature = input("Input Temperature with scale (e.g., 21F): ")
+    Scale_Convert = input("Convert to (F, C, or K): ")
+    
+    # If already in the desired scale, do nothing.
+    if 'F' in Temperature and Scale_Convert.upper() == 'F':
+        print("Already in Fahrenheit:", Temperature[:-1] + " F")
+    elif 'C' in Temperature and Scale_Convert.upper() == 'C':
+        print("Already in Celsius:", Temperature[:-1] + " C")
+    elif 'K' in Temperature and Scale_Convert.upper() == 'K':
+        print("Already in Kelvin:", Temperature[:-1] + " K")
+    
+    # Perform conversions.
+    if 'F' in Temperature and Scale_Convert.upper() == 'C':
+        tempC = (int(Temperature[:-1]) - 32) * 5/9
+        print("Converted Temperature:", tempC, "Celsius")
+    if 'F' in Temperature and Scale_Convert.upper() == 'K':
+        tempK = (int(Temperature[:-1]) - 32) * 5/9 + 273.15
+        print("Converted Temperature:", tempK, "Kelvin")
+    if 'C' in Temperature and Scale_Convert.upper() == 'F':
+        tempF = int(Temperature[:-1]) * 1.8 + 32
+        print("Converted Temperature:", tempF, "Fahrenheit")
+    if 'C' in Temperature and Scale_Convert.upper() == 'K':
+        tempK = int(Temperature[:-1]) + 273.15
+        print("Converted Temperature:", tempK, "Kelvin")
+    if 'K' in Temperature and Scale_Convert.upper() == 'F':
+        tempF = ((int(Temperature[:-1]) - 273.15) * 1.8) + 32
+        print("Converted Temperature:", tempF, "Fahrenheit")
+    if 'K' in Temperature and Scale_Convert.upper() == 'C':
+        tempC = int(Temperature[:-1]) - 273.15
+        print("Converted Temperature:", tempC, "Celsius")
+    print()
+
+###########################################################################
+# Challenge 17: RANDOMIZED PASSWORD GENERATOR
+###########################################################################
+def challenge17():
+    """
+    Challenge 17: Randomized Password Generator
+    - Generates a random password that meets criteria.
+    - Optionally allows the inclusion of a custom word.
+    """
+    print("\nChallenge 17: RANDOMIZED PASSWORD GENERATOR")
+    Set_Word = input("Do you want a certain word included? (Yes or No): ")
+    if Set_Word.lower() not in ['yes', 'no']:
+        print("Input not recognized.")
+    elif Set_Word.lower() == 'no':
+        print("\n-----------------------------------\nYour password is:")
+        characters = string.ascii_letters + string.punctuation + string.digits
+        password = "".join(random.choice(characters) for _ in range(random.randint(8, 14)))
+        print(password)
+    elif Set_Word.lower() == 'yes':
+        set_word = input("Enter your set word (less than 15 characters): ")
+        remaining_length = random.randint(8, 14) - len(set_word)
+        print("\n-----------------------------------\nYour password is:")
+        characters = string.ascii_letters + string.punctuation + string.digits
+        password = set_word + "".join(random.choice(characters) for _ in range(max(1, remaining_length)))
+        print(password)
+    print()
+
+###########################################################################
+# Challenge 18: MID-TERM WATCH PROGRAM (with Turtle Clock)
+###########################################################################
+def challenge18():
+    """
+    Challenge 18: MID-TERM WATCH PROGRAM
+    - Provides 5 modes:
+        • Game (Reaction Time)
+        • Current Time (supports US time zones)
+        • Timer (with option for fixed duration or manual-stop, which continuously updates)
+        • Stopwatch (continuously displays elapsed time until interrupted)
+        • Turtle Clock (a graphical moving clock using the Turtle module)
+    """
+    print("\nChallenge 18: MID-TERM WATCH PROGRAM")
+    print("Modes available:")
+    print("  1. Game (Reaction Time Game)")
+    print("  2. Current Time")
+    print("  3. Timer")
+    print("  4. Stopwatch")
+    print("  5. Turtle Clock")
+    print(" ")
+    
+    choice = input("Enter your mode (Game, Current, Timer, Stopwatch, Turtle): ").strip().lower()
+    
+    if choice == "game":
+        # Reaction Time Game:
+        print("\n--- Reaction Time Game ---")
+        input("Press Enter to start the countdown...")
+        countdown = random.randint(2, 5)
+        for i in range(countdown, 0, -1):
+            time.sleep(1)
+            print(str(i) + "...")
+        start = time.time()
+        input("REACT! Press Enter as fast as you can.")
+        elapsed = time.time() - start
+        print("Your reaction time is: {:.3f} seconds.".format(elapsed))
+        
+    elif choice == "current":
+        # Current Time with US Time Zones:
+        print("\n--- Current Time ---")
+        tz_choice = input("Choose a US Time Zone (Eastern, Central, Mountain, Pacific): ").strip().lower()
+        # Define offsets relative to UTC (assuming standard time):
+        offsets = {"eastern": -5, "central": -6, "mountain": -7, "pacific": -8}
+        if tz_choice in offsets:
+            now_utc = datetime.datetime.utcnow()
+            # Create a new time by adding the offset hours:
+            tz_time = now_utc.replace(tzinfo=datetime.timezone.utc)  \
+                      .astimezone(datetime.timezone(datetime.timedelta(hours=offsets[tz_choice])))
+            print("Current Date:", tz_time.strftime("%m-%d-%Y"))
+            print("Current Time:", tz_time.strftime("%H:%M:%S"), "(" + tz_choice.capitalize() + ")")
+        else:
+            print("Time Zone not recognized. Showing UTC time:")
+            now = datetime.datetime.utcnow()
+            print("Date:", now.strftime("%m-%d-%Y"))
+            print("Time:", now.strftime("%H:%M:%S"))
+        
+    elif choice == "timer":
+        # Timer mode: choose fixed duration or manual-stop.
+        print("\n--- Timer ---")
+        mode = input("Enter 'fixed' for a fixed duration or 'manual' to stop when you choose: ").strip().lower()
+        if mode == "fixed":
+            duration = int(input("Enter timer duration in seconds: "))
+            print("Timer starting...")
+            for sec in range(duration, 0, -1):
+                print(f"{sec} seconds remaining...")
+                time.sleep(1)
+            print("Time's up!")
+        elif mode == "manual":
+            print("Manual timer started. (Press Ctrl+C to stop and see elapsed time.)")
+            start = time.time()
+            try:
+                while True:
+                    elapsed = time.time() - start
+                    # Print the elapsed time on the same line.
+                    sys.stdout.write("\rElapsed time: {:.3f} seconds".format(elapsed))
+                    sys.stdout.flush()
+                    time.sleep(1)
+            except KeyboardInterrupt:
+                print("\nTimer stopped.")
+        else:
+            print("Invalid timer mode.")
+    
+    elif choice == "stopwatch":
+        # Stopwatch mode: continuously print elapsed time until user interrupts.
+        print("\n--- Stopwatch ---")
+        input("Press Enter to start the stopwatch... (Press Ctrl+C to stop)")
+        start = time.time()
+        try:
+            while True:
+                elapsed = time.time() - start
+                sys.stdout.write("\rElapsed time: {:.3f} seconds".format(elapsed))
+                sys.stdout.flush()
+                time.sleep(1)
+        except KeyboardInterrupt:
+            print("\nStopwatch stopped.")
+    
+    elif choice == "turtle":
+        # Turtle Clock: displays a digital clock that updates every second.
+        print("\n--- Turtle Clock ---")
+        print("A Turtle window will open. Close it to return to the menu.")
+        def turtle_clock():
+            wn = turtle.Screen()
+            wn.title("Turtle Clock")
+            wn.setup(width=400, height=400)
+            t = turtle.Turtle()
+            t.hideturtle()
+            t.speed(0)
+            def draw_clock():
+                t.clear()
+                now = datetime.datetime.now()
+                time_str = now.strftime("%H:%M:%S")
+                t.penup()
+                t.goto(0, 0)
+                t.write(time_str, align="center", font=("Courier", 24, "normal"))
+                wn.ontimer(draw_clock, 1000)
+            draw_clock()
+            wn.mainloop()
+        turtle_clock()
+    else:
+        print("Invalid mode selected.")
+    print()
+
+###########################################################################
+# Challenge 19: LIST VALUE RETURNING MULTIPLICATION
+###########################################################################
+def challenge19():
+    """
+    Challenge 19: List Value Returning Multiplication
+    - Defines a list of numbers.
+    - Uses functions that simply return their argument.
+    - Multiplies the first five numbers and prints the result.
+    """
+    print("\nChallenge 19: LIST VALUE RETURNING MULTIPLICATION")
+    nums = [18, 2, 4, -2, 5, -7]
+    print("Original list:", nums)
+    
+    def number_one(a): return a
+    def number_two(b): return b
+    def number_three(c): return c
+    def number_four(d): return d
+    def number_five(e): return e
+
+    product = (number_one(nums[0]) * number_two(nums[1]) *
+               number_three(nums[2]) * number_four(nums[3]) *
+               number_five(nums[4]))
+    print("Product of the first five numbers is:", product)
+    print()
+
+###########################################################################
+# Challenge 20: THE EUCLIDEAN ALGORITHM (GCD)
+###########################################################################
+def challenge20():
+    """
+    Challenge 20: The Euclidean Algorithm (GCD)
+    - Recursively computes the greatest common divisor of two numbers.
+    """
+    print("\nChallenge 20: THE EUCLIDEAN ALGORITHM")
+    a_val = input("Enter your first number: ")
+    b_val = input("Enter your second number: ")
+    
+    def GCD(a, b):
+        # Base condition: if b is 0, return a.
+        if b == 0:
+            return a
+        else:
+            return GCD(b, a % b)
+    
+    print("The GCD of " + str(a_val) + " and " + str(b_val) + " is:")
+    print(GCD(int(a_val), int(b_val)))
+    print()
+
+###########################################################################
+# Challenge 21: ADD TO 10 INPUT STRING QMARKS
+###########################################################################
+def challenge21():
+    """
+    Challenge 21: Add-to-10 Input String Qmarks
+    - Checks a string to see if, when digits appear, a digit and its predecessor sum to 10 with exactly 3 question marks between.
+    """
+    print("\nChallenge 21: ADD TO 10 INPUT STRING QMARKS")
+    print("[Enter a string; if a digit plus the previous digit equals 10, there must be exactly 3 question marks in between.]")
+    st1 = input("What's your string?: ")
+    def Qmark(s):
+        qnum = 0
+        digi = 0
+        has10 = False
+        for char in s:
+            if char.isdigit():
+                if int(char) + digi == 10:
+                    if qnum != 3:
+                        return 'false'
+                    has10 = True
+                digi = int(char)
+                qnum = 0
+            elif char == '?':
+                qnum += 1
+        return 'true' if has10 else 'false'
+    result = Qmark(st1)
+    print('"' + st1 + '" =>', result)
+    print()
+
+###########################################################################
+# Challenge 22: PRIME NUMBER IDENTIFICATION
+###########################################################################
+def challenge22():
+    """
+    Challenge 22: Prime Number Identification
+    - Determines if a given number is prime.
+    """
+    print("\nChallenge 22: PRIME NUMBER IDENTIFICATION")
+    num_input = input("What's your number?: ")
+    num = int(num_input)
+    is_prime = True
+    if num < 2:
+        is_prime = False
+    else:
+        for div in range(2, num):
+            if num % div == 0:
+                is_prime = False
+                break
+    if is_prime:
+        print(str(num) + " is a Prime Number.")
+    else:
+        print(str(num) + " is not a Prime Number.")
+    print()
+
+###########################################################################
+# Challenge 23: DARK OUTSIDE (with US Time Zone option)
+###########################################################################
+def challenge23():
+    """
+    Challenge 23: Dark Outside
+    - Determines if it is dark outside, allowing the user to choose a US time zone.
+    - (Dark is defined as hour ≥ 18 or < 6.)
+    """
+    print("\nChallenge 23: DARK OUTSIDE")
+    tz_choice = input("Choose a US Time Zone (Eastern, Central, Mountain, Pacific): ").strip().lower()
+    # Offsets relative to UTC (standard time, no DST)
+    offsets = {"eastern": -5, "central": -6, "mountain": -7, "pacific": -8}
+    if tz_choice in offsets:
+        utc_now = datetime.datetime.utcnow()
+        # Create a timezone-adjusted time:
+        tz_time = utc_now + datetime.timedelta(hours=offsets[tz_choice])
+        hour = tz_time.hour
+        print("The current time in", tz_choice.capitalize(), "is", tz_time.strftime("%H:%M:%S"))
+    else:
+        print("Time zone not recognized; using system local time.")
+        hour = datetime.datetime.now().hour
+    if hour >= 18 or hour < 6:
+        print("It is dark outside.")
+    else:
+        print("It's light outside.")
+    print()
+
+###########################################################################
+# Challenge 24: INPUT TARGET MATCHING
+###########################################################################
+def challenge24():
+    """
+    Challenge 24: Input Target Matching
+    - Randomly generates text until it exactly matches the target string.
+    - Prints each generation with a small delay.
+    """
+    print("\nChallenge 24: INPUT TARGET MATCHING")
+    possibleCharacters = string.ascii_uppercase + string.ascii_lowercase + string.digits + " ~`!@#$%^&*()_-+={}[]|\\:;\"<,>.?/"
+    target = input("Enter your Target Text: ")
+    print("\n------------------------------------------\n")
+    attemptThis = "".join(random.choice(possibleCharacters) for i in range(len(target)))
+    generation = 0
+    completed = False
+    while not completed:
+        print(attemptThis)
+        attemptNext = ""
+        completed = True
+        for i in range(len(target)):
+            if attemptThis[i] != target[i]:
+                completed = False
+                attemptNext += random.choice(possibleCharacters)
+            else:
+                attemptNext += target[i]
+        generation += 1
+        attemptThis = attemptNext
+        time.sleep(0.009)
+    print("\n------------------------------------------\n")
+    if generation != 1:
+        print("Target Text matched! That took " + str(generation) + " generations.")
+    else:
+        print("Target Text matched! That took " + str(generation) + " generation.")
+    print()
+
+###########################################################################
+# Challenge 25: PROGRAMMING CHOICE – HEADS OR TAILS (Typewriter Effect)
+###########################################################################
+def challenge25():
+    """
+    Challenge 25: Programming Choice – Heads or Tails
+    - Simulates a coin flip and prints the result letter-by-letter.
+    """
+    print("\nChallenge 25: PROGRAMMING CHOICE – HEADS OR TAILS")
+    chosen_side = input("Heads or Tails?: ")
+    coin_side = random.randint(1, 2)  # 1 = Heads, 2 = Tails
+    if coin_side == 1 and chosen_side == 'Heads':
+        print("___________________________\n")
+        announcement = 'You got Heads...'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n")
+        announcement = 'YOU WIN!'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("")
+    elif coin_side == 1 and chosen_side == 'Tails':
+        print("___________________________\n")
+        announcement = 'You got Heads...'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n")
+        announcement = 'YOU LOSE!'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("")
+    elif coin_side == 2 and chosen_side == 'Heads':
+        print("___________________________\n")
+        announcement = 'You got Tails...'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n")
+        announcement = 'YOU LOSE!'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("")
+    elif coin_side == 2 and chosen_side == 'Tails':
+        print("___________________________\n")
+        announcement = 'You got Tails...'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n")
+        announcement = 'YOU WIN!'
+        for char in announcement:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("")
+    print()
+
+###########################################################################
+# Challenge 26: ROOTS OF QUADRATIC EQUATIONS
+###########################################################################
+def challenge26():
+    """
+    Challenge 26: Roots of Quadratic Equations
+    - Solves a quadratic equation ax^2 + bx + c = 0.
+    - If the discriminant is negative, it computes complex roots.
+    """
+    print("\nChallenge 26: ROOTS OF QUADRATIC EQUATIONS")
+    print("Equation: ax^2 + bx + c")
+    a_val = float(input("Enter a: "))
+    b_val = float(input("Enter b: "))
+    c_val = float(input("Enter c: "))
+    print("")
+    discriminant = (b_val ** 2) - (4 * a_val * c_val)
+    if discriminant > 0:
+        x1 = ((-b_val) + sqrt(discriminant)) / (2 * a_val)
+        x2 = ((-b_val) - sqrt(discriminant)) / (2 * a_val)
+        print("There are 2 real roots: %f and %f" % (x1, x2))
+    elif discriminant == 0:
+        x = (-b_val) / (2 * a_val)
+        print("There is one real root:", x)
+    else:
+        # Use cmath to calculate complex roots when discriminant is negative.
+        x1 = ((-b_val) + cmath.sqrt(discriminant)) / (2 * a_val)
+        x2 = ((-b_val) - cmath.sqrt(discriminant)) / (2 * a_val)
+        print("There are 2 complex roots: {} and {}".format(x1, x2))
+    print()
+
+###########################################################################
+# Challenge 27: FINAL PROJECT STORY GAME: THE TOP SECRET MISSION
+###########################################################################
+def challenge27():
+    """
+    Challenge 27: Final Project Story Game: THE TOP SECRET MISSION
+    - Displays a dramatic story game with dialogue printed in typewriter style.
+    """
+    print("\nChallenge 27: FINAL PROJECT STORY GAME: THE TOP SECRET MISSION")
+    print(" ______________________________________________________")
+    print("| The Final Project Story Game: THE TOP SECRET MISSION |")
+    print("|______________________________________________________|___________________________________________________________________________________")
+    print(" ")
+    
+    # Begin mission dialogue (typewriter effect)
+    dialogue = ("It's currently 9:30 PM as it's dark and foggy out. You've made your arrival at an abandoned amusement park.")
+    for char in dialogue:
+        time.sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    
+    dialogue = (" After 5 minutes of looking around, you then find your assigned location where you're supposed to meet with your contact.")
+    print("\n\n")
+    for char in dialogue:
+        time.sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    
+    dialogue = (" As you make your way to the left side of an old rusty ferris wheel, you see an unknown figure wearing a black trenchcoat who seems to be waiting for someone.")
+    print("\n\n")
+    for char in dialogue:
+        time.sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    
+    dialogue = ('"That must be him..."')
+    print("\n\n")
+    for char in dialogue:
+        time.sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    
+    dialogue = (" You're perfectly just in time and on schedule. However, you've got to be quick about this. "
+                "You could potentially put the entire mission in jeopardy and who knows who else could be there?")
+    print("\n\n")
+    for char in dialogue:
+        time.sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    
+    dialogue = (" You walk up and interact with your contact.")
+    print("\n\n")
+    for char in dialogue:
+        time.sleep(0.1)
+        sys.stdout.write(char)
+        sys.stdout.flush()
+    
+    # Reaction event – user must answer quickly
+    print("\n\n--- REACTION EVENT ---")
+    start = time.time()
+    codename = input('"Who are you?" ')
+    print("")
+    print('"What is the passcode?"')
+    code = input()   # User types the passcode
+    end = time.time()
+    elapsed = end - start
+    Agentname = codename.split()
+    codename_final = "Agent " + (Agentname[-1] if Agentname else "Unknown")
+    
+    if elapsed > 10:
+        # User took too long – mission failure path.
+        dialogue = '"Ah, ' + codename_final + ', so it is you."'
+        print("")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"It has been quite some time..."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"But let us get that out of the way for now."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"As you know, I have managed to gather intel on the whereabouts of a destructive '
+                    'Russian nuclear bomb that is hidden somewhere in The United States."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"Fortunately for me, after years of searching and tracking it down, I have found that it is in '
+                    'a top secret warehouse facility located in Alaska."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"And of course, I was told that you, out of all people, were the right person for the job."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"Look, we do not have much time to spare and I think we might have been follo-"')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush() 
+        print("\n\n")
+        print('"DO NOT EVEN BOTHER RUNNING! WE GOT YOU SURROUNDED!!!"')
+        time.sleep(8)
+        dialogue = "MISSION FAILED."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.7)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n")
+    else:
+        # User answered fast enough – mission continues.
+        dialogue = '"Ah, ' + codename_final + ', so it is you."'
+        print("")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"It has been quite some time..."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"But let us get that out of the way for now."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"As you know, I have managed to gather intel on the whereabouts of a destructive '
+                    'Russian nuclear bomb that is hidden somewhere in The United States."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"Fortunately for me, after years of searching and tracking it down, I have found that it is in '
+                    'a top secret warehouse facility located in Alaska."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"And of course, I was told that you, out of all people, were the right person for the job."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"Look, we do not have much time to spare and I think we might have been followed..."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"Just take this paper, it has the exact location and coordinates of where that facility is."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"And also take this too. It is a device I have programmed myself which would be able to defuse the bomb."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "You hear people approaching from behind the carnival games."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n\n")
+        print('"They are here. We got to leave now!"')
+        time.sleep(5)
+        dialogue = "The Amusement Park Information Extraction Objective was a success."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "You've managed to barely escape and make it out alive with the classified information."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        time.sleep(8)
+        print("\n")
+        title = "_____________________________________________________"
+        for char in title:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        title = "-----------COMMENCING OPERATION: ESPIONAGE-----------"
+        print("\n")
+        for char in title:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        title = "_____________________________________________________"
+        print("\n")
+        for char in title:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "Day 4 since the information extraction..."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "It is currently dusk and snowing heavily out."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"Ok, let us go over this one more time ' + codename_final +
+                    ', you currently have some spy equipment, the location coordinates of the military facility, and a bomb disarming device."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"Now keep in mind that since this is a top secret stealth infiltration mission, you will have to go in alone. '
+                    'And if you are captured, the government will deny any involvement."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = ('"And remember, you must input the passcode \'Encryption\' into the bomb disarming device."')
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        
+        print("\n\n")
+        print('"FIVE MINUTES UNTIL DROPOFF!"')
+        print("\n")
+        dialogue = ('"I am afraid this is where we part ways... Good luck, ' + codename_final +
+                    '. This country depends on you."')
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "You make a parachute landing outside of the facility and break into the secret military base."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "After sneaking around for a while, you find the lethal nuclear bomb."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = '"So that must be it..."'
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "You attach the bomb disarming device to the explosive."
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        dialogue = "There's not enough time!"
+        print("\n")
+        for char in dialogue:
+            time.sleep(0.1)
+            sys.stdout.write(char)
+            sys.stdout.flush()
+        print("\n")
+        print("____________________________________________")
+        Passcode = input("Enter the passcode: ")
+        if Passcode == "Encryption":
+            print("\n____________________________________________\n")
+            characters = string.ascii_letters + string.punctuation + string.digits
+            Access_Code = "".join(random.choice(characters) for _ in range(random.randint(25, 40)))
+            possibleCharacters = string.ascii_uppercase + string.ascii_lowercase + string.digits + string.punctuation
+            attempThis = "".join(random.choice(possibleCharacters) for _ in range(len(Access_Code)))
+            completed = False
+            while not completed:
+                print(attempThis)
+                attemptNext = ""
+                completed = True
+                for i in range(len(Access_Code)):
+                    if attempThis[i] != Access_Code[i]:
+                        completed = False
+                        attemptNext += random.choice(possibleCharacters)
+                    else:
+                        attemptNext += Access_Code[i]
+                attempThis = attemptNext
+                time.sleep(0.009)
+            print("\n____________________________________________\n")
+            # Generate a random time (for dramatic effect)
+            Random_Bomb_Time = random.randint(1, 20)
+            Time_Left = str(Random_Bomb_Time)
+            if int(Time_Left) == 1:
+                print(" ____________________")
+                dialogue = "|      " + Time_Left + " second      |"
+                for char in dialogue:
+                    time.sleep(0.1)
+                    sys.stdout.write(char)
+                    sys.stdout.flush()
+                print("\n|____________________|")
+            else:
+                print(" ______________________")
+                dialogue = "|      " + Time_Left + " seconds      |"
+                for char in dialogue:
+                    time.sleep(0.1)
+                    sys.stdout.write(char)
+                    sys.stdout.flush()
+                print("\n|______________________|")
+            time.sleep(5)
+            print("\n")
+            time.sleep(4)
+            print(" ______________________")
+            dialogue = "|ACCESS CODE AUTHORIZED|"
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("\n|______________________|")
+            print("\n")
+            time.sleep(3)
+            print("___________________________")
+            print("")
+            dialogue = "      BOMB DEFUSED"
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("\n___________________________")
+            print("\n")
+            time.sleep(5)
+            dialogue = "You stopped the bomb with " + Time_Left + " seconds left!"
+            print("\n")
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            dialogue = " You saved the world."
+            print("\n")
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            time.sleep(5)
+            dialogue = "MISSION ACCOMPLISHED."
+            print("\n")
+            for char in dialogue:
+                time.sleep(0.7)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("\n")
+        else:
+            print("\n")
+            print("________________________________")
+            dialogue = "  W R O N G   P A S S C O D E   "
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("\n________________________________")
+            time.sleep(5)
+            print("\n")
+            print(" ______________")
+            print("|  0 seconds   |")
+            print("|______________|")
+            print("\n")
+            time.sleep(3)
+            print(" ___________________")
+            dialogue = "|  BOMB DETONATED   |"
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("\n|___________________|")
+            print("\n")
+            time.sleep(5)
+            dialogue = "You failed to stop the bomb. The nuclear blast decimated everything."
+            print("\n")
+            for char in dialogue:
+                time.sleep(0.1)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            time.sleep(5)
+            dialogue = "MISSION FAILED."
+            print("\n")
+            for char in dialogue:
+                time.sleep(0.7)
+                sys.stdout.write(char)
+                sys.stdout.flush()
+            print("\n")
+    print()
+
+###########################################################################
+# Challenge 27: FINAL PROJECT STORY GAME: THE TOP SECRET MISSION
+###########################################################################
+def challenge27():
+    """
+    Challenge 27: Final Project Story Game: THE TOP SECRET MISSION
+    - Displays the final mission story game (identical to Challenge 27 above).
+    """
+    # For clarity, we simply call challenge27() code from above.
+    # (In this file, Challenge 27 is fully defined in challenge27().)
+    challenge27()  # We already defined the full mission dialogue above.
+    # (You can later adjust this if you want separate final project behavior.)
+    
+###########################################################################
+# Main Menu: Challenge Selector
+###########################################################################
+def main_menu():
+    """
+    Main Menu:
+    - Displays the challenge numbers with their names.
+    - Lets the user choose which challenge to run.
+    - The user may run challenges one-by-one, in any order, or exit.
+    """
+    # Define a dictionary mapping challenge numbers (as strings)
+    # to a tuple of (function, "Challenge Title").
+    challenges = {
+        "1": (challenge1, "LIST OF FLAVORS"),
+        "2": (challenge2, "LIST OF NUMBERS COMMAND"),
+        "3": (challenge3, "LOOPING THE ARRAY"),
+        "4": (challenge4, "INPUT (Name, Age, Year of Birth)"),
+        "5": (challenge5, "THE MISSING NUMBERS"),
+        "6": (challenge6, "DNA SEQUENCE ANALYSIS"),
+        "7": (challenge7, "THE CALCULATOR"),
+        "8": (challenge8, "RANGE LIST OF DIVISIBILITY BY 7"),
+        "9": (challenge9, "NUMBERS & LETTERS INPUT"),
+        "10": (challenge10, "THE AREA OF A CIRCLE (Version 1)"),
+        "11": (challenge11, "ROCK-PAPER-SCISSORS GAME"),
+        "12": (challenge12, "THE AREA OF A CIRCLE (Teacher's Version)"),
+        "13": (challenge13, "PASSWORD VALIDITY"),
+        "14": (challenge14, "DICTIONARY DEMONSTRATION"),
+        "15": (challenge15, "SUMMING TWO RANDOM NUMBERS"),
+        "16": (challenge16, "TEMPERATURE CONVERSION"),
+        "17": (challenge17, "RANDOMIZED PASSWORD GENERATOR"),
+        "18": (challenge18, "MID-TERM WATCH PROGRAM"),
+        "19": (challenge19, "LIST VALUE RETURNING MULTIPLICATION"),
+        "20": (challenge20, "THE EUCLIDEAN ALGORITHM (GCD)"),
+        "21": (challenge21, "ADD TO 10 INPUT STRING QMARKS"),
+        "22": (challenge22, "PRIME NUMBER IDENTIFICATION"),
+        "23": (challenge23, "DARK OUTSIDE"),
+        "24": (challenge24, "INPUT TARGET MATCHING"),
+        "25": (challenge25, "HEADS OR TAILS (Typewriter Effect)"),
+        "26": (challenge26, "ROOTS OF QUADRATIC EQUATIONS"),
+        "27": (challenge27, "FINAL PROJECT STORY GAME: THE TOP SECRET MISSION"),
+    }
+    
+    while True:
+        print("\n====================================")
+        print("     Haas Hall Academy Bentonville High School Fall 2018 - Python Challenges for Computer Science")
+        print("====================================")
+        print("Select a challenge to run:")
+        for num in sorted(challenges.keys(), key=lambda x: int(x)):
+            # Print both the challenge number and its title.
+            print("  " + num + ". " + challenges[num][1])
+        print("  0. Exit")
+        
+        choice = input("Enter your challenge number (0 to exit): ").strip()
+        if choice == "0":
+            print("Exiting Combined Challenges. Goodbye!")
+            break
+        elif choice in challenges:
+            print("\n------------------------------------")
+            # Call the selected function.
+            challenges[choice][0]()
+            input("Press Enter to return to the main menu...")
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main_menu()
